@@ -6,11 +6,20 @@
 			<input type="text" id="profile_name" placeholder="Enter the Github Profile here..."/>
 			<a href="#" id="fetch_github_profile">Fetch</a>
 		</section>
+
+		<section>
 		<article>
 			<header>
-				
+				<img/>
+				<h1></h1>
+				<h2></h2>
 			</header>
+			<p>
+				<strong id="followers"> followers.</strong><br>
+				<strong id="repos"> public repos.</strong>
+			</p>
 		</article>
+	</section>
 	</main>
 
 	<script type="text/javascript" src="jquery.js"></script>
@@ -18,7 +27,12 @@
 	$('#fetch_github_profile').on('click', function(){
 		var profile_name = $('#profile_name').val();
 		$.get('https://api.github.com/users/' + profile_name, function(data) { console.log(data); 
-			$('article header').append('<img src="'+ data.avatar_url +'"/>')
+			$('article header img').attr('src', data.avatar_url);
+			$('article header h1').text(data.name);
+			$('article header h2').text(data.login);
+			$('#followers').prepend(data.followers);
+			$('#repos').prepend(data.public_repos);
+			// $('article header img').append('<h1>')
 		});
 	});
 	</script> 
