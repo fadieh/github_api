@@ -7,31 +7,39 @@
 			<a href="#" id="fetch_github_profile">Fetch</a>
 		</section>
 
-		<section>
-		<article>
-			<header>
-				<img/>
-				<h1></h1>
-				<h2></h2>
-			</header>
-			<p>
-				<strong id="followers"> followers.</strong><br>
-				<strong id="repos"> public repos.</strong>
-			</p>
-		</article>
+	<section id="profiles">
 	</section>
 	</main>
 
+	<template id="profileTemplate">
+			<article>
+			<header>
+				<img src="{{avatar_url}}" />
+				<h1>{{name}}</h1>
+				<h2>{{login}}</h2>
+			</header>
+			<p>
+				<strong id="followers">{{followers}} followers</strong><br>
+				<strong id="repos">{{public_repos}} public repos</strong>
+			</p>
+		</article>
+	</template>
+
 	<script type="text/javascript" src="jquery.js"></script>
+	<script type="text/javascript" src="handlebars.js"></script>
 	<script type="text/javascript">
 	$('#fetch_github_profile').on('click', function(){
 		var profile_name = $('#profile_name').val();
-		$.get('https://api.github.com/users/' + profile_name, function(data) { console.log(data); 
-			$('article header img').attr('src', data.avatar_url);
-			$('article header h1').text(data.name);
-			$('article header h2').text(data.login);
-			$('#followers').prepend(data.followers);
-			$('#repos').prepend(data.public_repos);
+		var source = $('#profileTemplate').html();
+		var template = Handlebars.compile(source);
+		$.get('https://api.github.com/users/' + profile_name, function(githubProfile) { $('#profiles').append(template(githubProfile)); 
+
+
+			// $('article header img').attr('src', data.avatar_url);
+			// $('article header h1').text(data.name);
+			// $('article header h2').text(data.login);
+			// $('#followers').prepend(data.followers);
+			// $('#repos').prepend(data.public_repos);
 			// $('article header img').append('<h1>')
 		});
 	});
