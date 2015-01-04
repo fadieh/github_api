@@ -28,15 +28,7 @@
 
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="handlebars.js"></script>
-	<script type="text/javascript">
-	$('#fetch_github_profile').on('click', function(){
-		var profile_name = $('#profile_name').val();
-		var source = $('#profileTemplate').html();
-		var template = Handlebars.compile(source);
-		$.get('https://api.github.com/users/' + profile_name, function(githubProfile) { $('#profiles').append(template(githubProfile)); 
-		});
-	});
-	</script> 
+	<script type="text/javascript" src="interface.js"></script> 
 
 </body>
 </html>
