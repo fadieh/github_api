@@ -34,14 +34,6 @@
 		var source = $('#profileTemplate').html();
 		var template = Handlebars.compile(source);
 		$.get('https://api.github.com/users/' + profile_name, function(githubProfile) { $('#profiles').append(template(githubProfile)); 
-
-
-			// $('article header img').attr('src', data.avatar_url);
-			// $('article header h1').text(data.name);
-			// $('article header h2').text(data.login);
-			// $('#followers').prepend(data.followers);
-			// $('#repos').prepend(data.public_repos);
-			// $('article header img').append('<h1>')
 		});
 	});
 	</script> 
